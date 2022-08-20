@@ -1,4 +1,5 @@
 import shutil
+import sys
 import tkinter as tk
 from pathlib import Path
 from tkinter import ttk, filedialog, messagebox
@@ -148,7 +149,14 @@ class GUI(ttk.Frame):
 def open_gui():
     root = tk.Tk()
     root.title("Steps2Blocks by Zhaey")
-    root.attributes('-type', 'utility')
+    if sys.platform == "linux":
+        root.attributes('-type', 'utility')
+    elif sys.platform == "win32":
+        root.attributes('-toolwindow', True)
+    elif sys.platform == "darwin":  # Mac
+        pass
+    else:
+        pass
     gui = GUI(root)
     gui.grid(column=0, row=0, sticky="nwes")
     root.columnconfigure(0, weight=1)
